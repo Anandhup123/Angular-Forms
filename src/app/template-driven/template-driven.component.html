@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <div>
+    <h1>Template Driven form </h1> <br><br>
+    <form #f="ngForm" (ngSubmit)="f.valid&&onsubmit()">
+   First Name : <input type="text" name="first_name" [(ngModel)]="formdata.first_name"  #t1="ngModel" required="required"><br>
+                <label class="text-danger" *ngIf="f.submitted&&t1.errors&&t1.errors['required']">first name is required</label><br>
+
+    Last Name : <input type="text" name="last_name" [(ngModel)]="formdata.last_name" #t2="ngModel" required="required"><br>
+                <label class="text-danger" *ngIf="f.submitted&&t2.errors&&t2.errors['required']">Last name is required</label><br>
+
+        email : <input type="email" name="email" [(ngModel)]="formdata.email" #t3="ngModel" required="required" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                <label class="text-danger" *ngIf="f.submitted&&t3.errors&&t3.errors['required']">Email is required</label>
+                <label class="text-danger" *ngIf="f.submitted&&t3.errors&&t3.errors['pattern']">Check your email format</label><br>
+
+        phone : <input type="number" name="phone" [(ngModel)]="formdata.phone" #t4="ngModel" required="required" maxlength="10" pattern="[7-9]{1}[0-9]{9}"><br>
+                <label class="text-danger" *ngIf="f.submitted&&t4.errors&&t4.errors['required']">Phone number is required</label>
+                <label class="text-danger" *ngIf="f.submitted&&t4.errors&&t4.errors['pattern']">Invalid phone number </label><br>
+
+    password :  <input type="password" name="password" [(ngModel)]="formdata.password" #t5="ngModel" required="required" maxlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><br>
+                <label class="text-danger" *ngIf="f.submitted&&t5.errors&&t5.errors['required']">password is required</label>
+                <label class="text-danger" *ngIf="f.submitted&&t5.errors&&t5.errors['pattern']">invalid password format (contains 1-Uppercase,1-lowercase,numbers and min. 8 char.)</label><br><br>
+
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>  
+    <br><br>
+    <button type="button" class="btn btn-warning" (click)="go()" >Go</button>
+
+   </div>
+</body>
+</html>
+
+
+
+
+<!-- pattern for password ="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" -->
+<!-- pattern for phone number ="[7-9]{1}[0-9]{9}" -->
+<!-- pattern for Email ="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" -->
